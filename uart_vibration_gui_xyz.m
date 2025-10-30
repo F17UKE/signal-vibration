@@ -51,13 +51,13 @@ function uart_vibration_gui_xyz
 
     % Time domain Z
     ax5 = nexttile(t,5); hold(ax5,'on'); grid(ax5,'on');
-    hZ = plot(ax5,nan,nan,'b');
+    hZ = plot(ax5,nan,nan,'y');
     xlabel(ax5,'Sample'); ylabel(ax5,'Z (g)');
     hTitleZ = title(ax5,'Time Domain Z'); ylim(ax5,[-1.2 1.2]);
 
     % FFT Z
     ax6 = nexttile(t,6); hold(ax6,'on'); grid(ax6,'on');
-    hFFT_Z = plot(ax6,nan,nan,'b');
+    hFFT_Z = plot(ax6,nan,nan,'y');
     xlabel(ax6,'Frequency (Hz)'); ylabel(ax6,'Mag (g)');
     title(ax6,'FFT Z'); xlim(ax6,[0 Fs/2]);
 
@@ -65,7 +65,7 @@ function uart_vibration_gui_xyz
     ax7 = nexttile(t,[1 2]); hold(ax7,'on'); grid(ax7,'on');
     hXraw = plot(ax7,nan,nan,'r');
     hYraw = plot(ax7,nan,nan,'g');
-    hZraw = plot(ax7,nan,nan,'b');
+    hZraw = plot(ax7,nan,nan,'y');
     xlabel(ax7,'Sample'); ylabel(ax7,'Raw (LSB)');
     legend(ax7,{'X raw','Y raw','Z raw'});
     title(ax7,'Time Domain Raw (LSB)'); ylim(ax7,[-330 330]);
