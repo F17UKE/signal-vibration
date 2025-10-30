@@ -11,7 +11,10 @@ entity mux is
 			 sclk           : BUFFER  STD_LOGIC;                      --SPI bus: serial clock
 			 ss_n           : BUFFER  STD_LOGIC_VECTOR(0 DOWNTO 0);   --SPI bus: slave select
 			 mosi           : OUT     STD_LOGIC;                      --SPI bus: master out, slave in
-			 data_out 		 : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0)  --x-axis acceleration data
+			 data_x 		    : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0);
+			 data_y 		    : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0);
+			 data_z 		    : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0);
+			 data_out 		 : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0)   --acceleration data that select
 	);
 end entity;
 
@@ -44,4 +47,7 @@ architecture behavioral of mux is
 		data_out <= result;
 	end process;
 	data_out <= result;
+	data_x <= a_x;
+	data_y <= a_y;
+	data_z <= a_z;
 end architecture;

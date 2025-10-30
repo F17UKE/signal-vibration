@@ -25,7 +25,7 @@ begin
       when "1001" => seg <= "0010000"; -- 9
 		when "1010" => seg <= "0111111"; -- -
 		when "1011" => seg <= "0001001"; -- x
-		when "1100" => seg <= "0011001"; -- y
+		when "1100" => seg <= "0010001"; -- y
 		when "1101" => seg <= "0100100"; -- z
       when others => seg <= "1111111"; -- blank
     end case;
