@@ -9,7 +9,7 @@ entity bin2bcd is
   );
   port (
 	 sw : in std_logic_vector(1 downto 0);
-    bin : in  std_logic_vector(BIN_WIDTH-1 downto 0);
+    bin: in  std_logic_vector(BIN_WIDTH-1 downto 0);
     d1 : out std_logic_vector(3 downto 0);
 	 d2 : out std_logic_vector(3 downto 0);
 	 d3 : out std_logic_vector(3 downto 0);
