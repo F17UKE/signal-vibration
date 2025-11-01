@@ -29,7 +29,7 @@ ENTITY pmod_accelerometer_adxl345 IS
   GENERIC(
     clk_freq   : INTEGER := 50;              --system clock frequency in MHz
     data_rate  : STD_LOGIC_VECTOR := "1101"; --data rate code to configure the accelerometer
-    data_range : STD_LOGIC_VECTOR := "11");  --data range code to configure the accelerometer
+    data_range : STD_LOGIC_VECTOR := "00");  --data range code to configure the accelerometer
   PORT(
     clk            : IN      STD_LOGIC;                      --system clock
     reset_n        : IN      STD_LOGIC;                      --active low asynchronous reset

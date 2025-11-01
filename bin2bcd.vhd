@@ -26,7 +26,7 @@ signal int1, int2, int3, int4, int5, int6 : integer;
 begin
   process(sw, bin)
   begin
-    if bin(15) = '1' then 
+    if bin(BIN_WIDTH-1) = '1' then 
 		abs_value <= unsigned(-signed(bin)); 
 		int5 <= 10;
 	 else 
@@ -34,17 +34,17 @@ begin
 		int5 <= 15;
 	end if;
 	
-	case sw is
-		when "00" => int6 <= 11;
-		when "01" => int6 <= 12;
-		when "10" => int6 <= 13;
-		when "11" => int6 <= 15;
-	end case;
-	
 	int1 <= to_integer(abs_value) mod 10;
 	int2 <= to_integer(abs_value)/10 mod 10;
 	int3 <= to_integer(abs_value)/100 mod 10;
 	int4 <= to_integer(abs_value)/1000 mod 10;
+	
+	case sw is
+		when "00" => int6 <= 11;
+		when "01" => int6 <= 12;
+		when "10" => int6 <= 13;
+		when "11" => int6 <= 15; int1 <= 15; int2 <= 15; int3 <= 15; int4 <= 15; int5 <= 15;
+	end case;
 	
   end process;
   d1 <= std_logic_vector(to_unsigned(int1,4));

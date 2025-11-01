@@ -2,6 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+-- [header][x_l][x_h][y_l][y_h][z_l][z_h][footer]
 entity uart_tx_de10 is
     Port (
         CLK   : in  STD_LOGIC;     -- 50 MHz input clock
@@ -55,15 +56,15 @@ begin
             case state is
 
                 when IDLE =>
-                    -- เตรียมเฟรมใหม่ทุกครั้ง
-                    frame(0) <= x"AA";
-                    frame(1) <= X_IN(7 downto 0);
-                    frame(2) <= X_IN(15 downto 8);
-                    frame(3) <= Y_IN(7 downto 0);
-                    frame(4) <= Y_IN(15 downto 8);
-                    frame(5) <= Z_IN(7 downto 0);
-                    frame(6) <= Z_IN(15 downto 8);
-                    frame(7) <= x"55";
+  
+                    frame(0) <= x"AA";					-- header
+                    frame(1) <= X_IN(7 downto 0);  -- x_l
+                    frame(2) <= X_IN(15 downto 8); -- x_h
+                    frame(3) <= Y_IN(7 downto 0);  -- y_l
+                    frame(4) <= Y_IN(15 downto 8); -- y_h
+                    frame(5) <= Z_IN(7 downto 0);  -- z_l
+                    frame(6) <= Z_IN(15 downto 8); -- z_h
+                    frame(7) <= x"55";					-- footer
 
                     tx_reg   <= '1';
                     counter  <= 0;

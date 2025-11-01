@@ -6,28 +6,18 @@ entity mux is
 	port(
 			 clk            : IN      STD_LOGIC;                      --system clock
 			 reset_n        : IN      STD_LOGIC;                      --active low asynchronous reset
+			 a_x 				 : IN      STD_LOGIC_VECTOR(15 DOWNTO 0);
+			 a_y 				 : IN      STD_LOGIC_VECTOR(15 DOWNTO 0);
+			 a_z 				 : IN      STD_LOGIC_VECTOR(15 DOWNTO 0);
 			 sw				 : IN      STD_LOGIC_VECTOR(1 DOWNTO 0);
-			 miso           : IN      STD_LOGIC;                      --SPI bus: master in, slave out
-			 sclk           : BUFFER  STD_LOGIC;                      --SPI bus: serial clock
-			 ss_n           : BUFFER  STD_LOGIC_VECTOR(0 DOWNTO 0);   --SPI bus: slave select
-			 mosi           : OUT     STD_LOGIC;                      --SPI bus: master out, slave in
-			 data_x 		    : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0);
-			 data_y 		    : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0);
-			 data_z 		    : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0);
 			 data_out 		 : OUT     STD_LOGIC_VECTOR(15 DOWNTO 0)   --acceleration data that select
 	);
 end entity;
 
 architecture behavioral of mux is
-	signal a_x : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
-	signal a_y : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
-	signal a_z : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
-	
 	signal result : STD_LOGIC_VECTOR(15 DOWNTO 0) := (OTHERS => '0');
+
 	begin 
-	
-		axdl : entity work.pmod_accelerometer_adxl345(behavior)
-		port map (clk => clk, reset_n => reset_n, miso => miso, mosi => mosi, sclk => sclk, ss_n => ss_n, acceleration_x => a_x, acceleration_y => a_y, acceleration_z => a_z);
 		
 		process(clk, reset_n)
 		begin
@@ -37,17 +27,14 @@ architecture behavioral of mux is
 		
 		elsif rising_edge(clk) then 
 			if sw = "00" then --x
-				result <= a_x(15 downto 0);
+				result <= a_x;
 			elsif sw = "01" then --y
-				result <= a_y(15 downto 0);
+				result <= a_y;
 			else
-				result <= a_z(15 downto 0);
+				result <= a_z;
 			end if;
 		end if;
 		data_out <= result;
 	end process;
 	data_out <= result;
-	data_x <= a_x;
-	data_y <= a_y;
-	data_z <= a_z;
 end architecture;

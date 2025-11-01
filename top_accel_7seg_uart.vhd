@@ -23,6 +23,7 @@ entity top_accel_7seg_uart is
     -- 7-segment display outputs
     HEX1,HEX2,HEX3,HEX4,HEX5,HEX6 : out std_logic_vector(6 downto 0);
 
+
     -- UART TX output
     uart_txd : out std_logic
   );
@@ -44,6 +45,20 @@ architecture rtl of top_accel_7seg_uart is
   signal byte_sel : integer range 0 to 7 := 0;
 
 begin
+
+	axdl : entity work.pmod_accelerometer_adxl345(behavior)
+	 port map (
+		clk => clk, 
+		reset_n => rst_n, 
+		miso => spi_miso, 
+		mosi => spi_mosi, 
+		sclk => spi_sclk, 
+		ss_n => spi_cs_n, 
+		acceleration_x => accel_x, 
+		acceleration_y => accel_y, 
+		acceleration_z => accel_z
+	);
+		
   ----------------------------------------------------------------
   -- ADXL345 interface
   ----------------------------------------------------------------
@@ -51,14 +66,10 @@ begin
     port map (
       clk      => clk,
       reset_n  => rst_n,
-      miso     => spi_miso,
-      mosi     => spi_mosi,
-      sclk     => spi_sclk,
-      ss_n     => spi_cs_n,
+		a_x      => accel_x,
+		a_y      => accel_y,
+		a_z      => accel_z,
       sw       => sw,
-      data_x   => accel_x,
-      data_y   => accel_y,
-      data_z   => accel_z,
       data_out => data_select
     );
 
